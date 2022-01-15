@@ -1,8 +1,5 @@
 <template>
     <div id="app">
-        <p>
-            二分木を書く
-        </p>
         <textarea v-model="output"></textarea>
         <!--<p>{{ output }}</p>-->
         <network id="network"
@@ -31,8 +28,8 @@ export default {
                 },
                 layout: {
                     hierarchical: {
-                        direction: "UD",
-                        sortMethod: "directed"
+                        direction: 'UD',
+                        sortMethod: 'directed'
                     }
                 },
                 nodes: {
@@ -41,7 +38,7 @@ export default {
                     font: {
                         color: 'white'
                     },
-                    color: "skyblue"
+                    color: 'skyblue'
                 },
                 physics: false
             }
