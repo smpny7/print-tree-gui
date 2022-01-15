@@ -17,6 +17,11 @@ export default new Router({
             path: '/how_to_use',
             name: 'how_to_use',
             component: () => import('./components/HowToUse.vue')
+        },
+        {
+            path: '/generator',
+            name: 'generator',
+            component: () => import('./components/Generator.vue')
         }
     ]
 })

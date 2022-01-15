@@ -32,11 +32,10 @@
                 </li>
                 <li class="step step-info">
                     <p>
-                        <a class="btn btn-ghost btn-sm bg-neutral text-white rounded-btn top-0.5 relative"
-                           href="#">
+                        <router-link to="/generator" class="btn btn-ghost btn-sm bg-neutral text-white rounded-btn top-0.5 relative">
                             <i class="ri-code-line ri-xl mr-2"></i>
                             Generator
-                        </a>
+                        </router-link>
                         でコード生成
                     </p>
                 </li>
