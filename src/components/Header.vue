@@ -1,9 +1,21 @@
 <template>
     <div class="p-4">
         <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box">
+            <div v-if="!is_home" class="flex-none">
+                <router-link to="/" class="btn btn-square btn-ghost">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current text-success">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </router-link>
+            </div>
+
             <div class="flex-1 px-2 mx-2">
                 <div class="text-lg font-bold">
-                    <h1 class="inline">Print Tree GUI</h1>
+                    <h1 class="inline">
+                        <router-link to="/">
+                            Print Tree GUI
+                        </router-link>
+                    </h1>
                     <span class="badge ml-2">ver {{ version }}</span>
                 </div>
             </div>
@@ -44,6 +56,11 @@ export default {
     data() {
         return {
             version: p.version
+        }
+    },
+    computed: {
+        is_home() {
+            return this.$route.path === '/'
         }
     }
 }
