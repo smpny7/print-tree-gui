@@ -5,10 +5,10 @@
         </p>
         <textarea v-model="output"></textarea>
         <!--<p>{{ output }}</p>-->
-        <network id="mynetwork"
+        <network id="network"
                  ref="network"
-                 :nodes="nodes"
                  :edges="edges"
+                 :nodes="nodes"
                  :options="options">
         </network>
     </div>
@@ -25,19 +25,34 @@ export default {
             current_node: 0,
             parent_nodes: [],
             options: {
+                edges: {
+                    arrows: 'to',
+                    smooth: false
+                },
                 layout: {
                     hierarchical: {
                         direction: "UD",
                         sortMethod: "directed"
                     }
-                }
+                },
+                nodes: {
+                    shape: 'circle',
+                    size: 40,
+                    font: {
+                        color: 'white'
+                    },
+                    color: "skyblue"
+                },
+                physics: false
             }
         }
     },
     watch: {
         output() {
+            this.current_node = 0
             this.nodes.splice(0, this.nodes.length)
             this.edges.splice(0, this.edges.length)
+            this.parent_nodes.splice(0, this.parent_nodes.length)
             this.buildTree()
         }
     },
@@ -47,35 +62,26 @@ export default {
     methods: {
         buildTree() {
             const obj = JSON.parse(this.output)
-            console.log(obj)
             this.addNode(obj)
         },
         addNode(obj) {
             this.current_node++
-            this.nodes.push({id: this.current_node.toString(), label: obj.type})
-            console.log(this.nodes)
+            if (obj.varName !== 'null' && obj.value !== 'null')
+                this.nodes.push({color: 'orange', id: this.current_node.toString(), label: `${obj.varName}[${obj.value}]\n[${obj.type}]`, shape: 'box', size: 100})
+            else if (obj.varName !== 'null')
+                this.nodes.push({color: 'orange', id: this.current_node.toString(), label: `${obj.varName}\n[${obj.type}]`, shape: 'box', size: 100})
+            else if (obj.value !== 'null')
+                this.nodes.push({color: 'orange', id: this.current_node.toString(), label: `${obj.value}\n[${obj.type}]`, shape: 'box', size: 100})
+            else
+                this.nodes.push({id: this.current_node.toString(), label: obj.type})
             this.edges.push({from: this.parent_nodes.slice(-1)[0], to: this.current_node.toString()})
-            console.log(this.edges)
-            console.log("child → " + obj.child[0])
             if (obj.child[0]) {
-                console.log("子供あり" + obj.child[0].type)
                 this.parent_nodes.push(this.current_node)
                 this.addNode(obj.child[0])
                 this.parent_nodes.pop()
-                console.log("現在の親ノード")
-                console.log(this.parent_nodes)
             }
-            console.log("brother → " + obj.brother[0])
-            if (obj.brother[0]) {
-                console.log("兄弟あり" + obj.brother[0].type)
+            if (obj.brother[0])
                 this.addNode(obj.brother[0])
-            }
-            console.log("C_Node")
-            console.log(this.current_node)
-
-            console.log("FINISH")
-            console.log(this.nodes)
-            console.log(this.edges)
         }
     }
 }
@@ -91,7 +97,7 @@ export default {
     margin-top: 60px;
 }
 
-#mynetwork {
+#network {
     position: absolute;
     top: 0;
     left: 0;
