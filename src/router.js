@@ -11,17 +11,19 @@ export default new Router({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
         },
         {
             path: '/how_to_use',
             name: 'how_to_use',
-            component: () => import('./components/HowToUse.vue')
+            component: () => import('./components/HowToUse.vue'),
+            meta: {title: 'How To Use'}
         },
         {
             path: '/generator',
             name: 'generator',
-            component: () => import('./components/Generator.vue')
+            component: () => import('./components/Generator.vue'),
+            meta: {title: 'Generator'}
         }
     ]
 })
