@@ -14,7 +14,7 @@
                     <h1 class="inline">
                         <router-link to="/">
                             <!--suppress HtmlUnknownTarget -->
-                            <img src="/icon-192x192.png" class="inline h-6 mr-2 align-top" alt="Print Tree GUI">
+                            <img src="/icon-192x192.png" class="hidden sm:inline h-6 mr-2 align-top" alt="Print Tree GUI">
                             Print Tree GUI
                         </router-link>
                     </h1>
