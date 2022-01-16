@@ -8,7 +8,7 @@
                      :options="options">
             </network>
             <p class="text-gray-400 top-4 right-4 absolute">
-                <span class="mr-2">ドラッグ・拡大・縮小ができます</span>
+                <span class="cursor-default select-none mr-2">ドラッグ・拡大・縮小ができます</span>
                 <i class="ri-drag-move-2-line ri-xl top-1 relative"></i>
             </p>
         </div>

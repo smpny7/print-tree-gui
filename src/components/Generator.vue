@@ -16,8 +16,10 @@
                         <li class="step step-info">
                             <p>
                                 <i>print_tree_gui.h</i> の
-                                <label for="modal" @click="generate_h"
+                                <label v-if="can_generate" for="modal" @click="generate_h"
                                        class="btn btn-info modal-button">コード生成する</label>
+                                <label v-else
+                                       class="btn btn-info modal-button cursor-not-allowed">コード生成する</label>
                             </p>
                         </li>
                         <li class="step step-info text-left">main 関数で以下を実行し、出力をこのサイトに貼り付ける！</li>
@@ -61,20 +63,25 @@ int main(void)
 typedef enum
 {
 <textarea class="textarea textarea-ghost w-full pl-12" cols="30" rows="10" v-model="node_type_raw"
+          :class="{'border-2 border-yellow-500': is_valid.node_type_raw === false}"
           placeholder="Pro_AST,
 Decls_AST,
 Ident_AST,
 Number_AST,
 ArryEl_AST,
 ...">
-</textarea>
+</textarea><InvalidAlert v-if="is_valid.node_type_raw === false"/>
 } NodeType;
 
 
-<span class="text-gray-500">/* 2. この中で、"NUMBERの値" を選択 */</span>
+<span class="text-gray-500">/* 2. この中で、"変数" と "配列" を選択 */</span>
 
 <input type="text" class="textarea textarea-ghost w-full" v-model="num_type_name"
-       placeholder="Number_AST">
+       :class="{'border-2 border-yellow-500': is_valid.num_type_name === false}" placeholder="Number_AST"><InvalidAlert
+                        v-if="is_valid.num_type_name === false" class="mt-2"/>
+<input type="text" class="textarea textarea-ghost w-full mt-3" v-model="array_type_name"
+       :class="{'border-2 border-yellow-500': is_valid.array_type_name === false}" placeholder="ArryEl_AST"><InvalidAlert
+                        v-if="is_valid.array_type_name === false" class="mt-2"/>
                     </code>
                 </pre>
             </div>
@@ -86,11 +93,21 @@ ArryEl_AST,
 
 typedef struct abstract_node
 {
-    NodeType <input type="text" class="textarea textarea-ghost my-1 w-32" v-model="nType" placeholder="nType">;
-    char *<input type="text" class="textarea textarea-ghost my-1 w-32" v-model="varName" placeholder="varName">;
-    int <input type="text" class="textarea textarea-ghost my-1 w-32" v-model="value" placeholder="value">;
-    struct Node *<input type="text" class="textarea textarea-ghost my-1 w-32" v-model="child" placeholder="child">;
-    struct Node *<input type="text" class="textarea textarea-ghost my-1 w-32" v-model="brother" placeholder="brother">;
+    NodeType <input type="text" class="textarea textarea-ghost my-1 w-32" v-model="nType"
+                    :class="{'border-2 border-yellow-500': is_valid.nType === false}" placeholder="nType">;<InvalidAlert
+                        v-if="is_valid.nType === false" class="ml-6"/>
+    char *<input type="text" class="textarea textarea-ghost my-1 w-32" v-model="varName"
+                 :class="{'border-2 border-yellow-500': is_valid.varName === false}" placeholder="varName">;<InvalidAlert
+                        v-if="is_valid.varName === false" class="ml-6"/>
+    int <input type="text" class="textarea textarea-ghost my-1 w-32" v-model="value"
+               :class="{'border-2 border-yellow-500': is_valid.value === false}" placeholder="value">;<InvalidAlert
+                        v-if="is_valid.value === false" class="ml-6"/>
+    struct Node *<input type="text" class="textarea textarea-ghost my-1 w-32" v-model="child"
+                        :class="{'border-2 border-yellow-500': is_valid.child === false}" placeholder="child">;<InvalidAlert
+                        v-if="is_valid.child === false" class="ml-6"/>
+    struct Node *<input type="text" class="textarea textarea-ghost my-1 w-32" v-model="brother"
+                        :class="{'border-2 border-yellow-500': is_valid.brother === false}" placeholder="brother">;<InvalidAlert
+                        v-if="is_valid.brother === false" class="ml-6"/>
 } Node;
 
 <span class="text-gray-500">/* ✨ 以上で終了です ✨ */</span>
@@ -101,10 +118,10 @@ typedef struct abstract_node
             </div>
         </div>
 
-        <input type="checkbox" id="modal" class="modal-toggle">
+        <input id="modal" class="modal-toggle" type="checkbox">
         <div class="modal">
             <div class="modal-box">
-                <p v-html="this.output_html" class="text-left text-xs"></p>
+                <p v-html="this.output_html" class="text-left text-xs"/>
                 <div class="modal-action">
                     <label for="modal" @click="download_h" class="btn btn-info">保存する</label>
                     <label for="modal" class="btn">閉じる</label>
@@ -116,39 +133,84 @@ typedef struct abstract_node
 
 <script>
 import Papa from 'papaparse'
-import moment from 'moment';
+import moment from 'moment'
+import InvalidAlert from '@/components/parts/InvalidAlert'
 
-const p = require('/package.json');
+const p = require('/package.json')
 
 export default {
     name: 'Generator',
+    components: {
+        InvalidAlert
+    },
     data() {
         return {
             version: p.version,
             node_type_raw: '',
             num_type_name: '',
+            array_type_name: '',
             nType: '',
             varName: '',
             value: '',
             child: '',
             brother: '',
             output: '',
-            output_html: ''
+            output_html: '',
+            is_valid: {
+                node_type_raw: null,
+                num_type_name: null,
+                array_type_name: null,
+                varName: null,
+                value: null,
+                child: null,
+                brother: null
+            }
         }
     },
-    // watch: {
-    //     node_type_raw(value) {
-    //
-    //     }
-    // },
+    computed: {
+        can_generate() {
+            return this.is_valid.node_type_raw === true &&
+                this.is_valid.num_type_name === true &&
+                this.is_valid.array_type_name === true &&
+                this.is_valid.varName === true &&
+                this.is_valid.value === true &&
+                this.is_valid.child === true &&
+                this.is_valid.brother === true
+        }
+    },
+    watch: {
+        node_type_raw(value) {
+            this.is_valid.node_type_raw = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
+        },
+        num_type_name(value) {
+            this.is_valid.num_type_name = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
+        },
+        array_type_name(value) {
+            this.is_valid.array_type_name = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
+        },
+        nType(value) {
+            this.is_valid.nType = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
+        },
+        varName(value) {
+            this.is_valid.varName = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
+        },
+        value(value) {
+            this.is_valid.value = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
+        },
+        child(value) {
+            this.is_valid.child = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
+        },
+        brother(value) {
+            this.is_valid.brother = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
+        }
+    },
     methods: {
         generate_h() {
-            let value = this.node_type_raw.replace(/\r?\n/g, '')
+            let value = this.node_type_raw.replace(/\r?\n/g, '').replace(/ /g, '')
             if (value.slice(-1) === ',') value = value.slice(0, -1)
             const arr = Papa.parse(value)
 
             this.output = `
-
 /*
 * ===================================================
 *  Print Tree GUI  ver.${this.version}  (${moment().format('MMMM Do YYYY')})
@@ -179,7 +241,7 @@ void printTreeGUI(Node *np)
     printf("\\"varName\\": \\"%s\\",", np->${this.varName} ? np->${this.varName} : "null");
 
     printf("\\"value\\": ");
-    np->${this.nType} == ${this.num_type_name} ? printf("\\"%d\\",", np->${this.value}) : printf("\\"null\\",");
+    np->${this.nType} == ${this.num_type_name} || np->${this.nType} == ${this.array_type_name} ? printf("\\"%d\\",", np->${this.value}) : printf("\\"null\\",");
 
     printf("\\"child\\": [");
     if (np->${this.child} != NULL)
