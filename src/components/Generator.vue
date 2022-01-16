@@ -17,7 +17,7 @@
                             <p>
                                 <i>print_tree_gui.h</i> の
                                 <label for="modal" @click="generate_h"
-                                       class="btn btn-accent modal-button">コード生成する</label>
+                                       class="btn btn-info modal-button">コード生成する</label>
                             </p>
                         </li>
                         <li class="step step-info text-left">main 関数で以下を実行し、出力をこのサイトに貼り付ける！</li>
@@ -29,7 +29,7 @@
                         <code>
 <span class="text-gray-500">// ▼ これを忘れずに！！ ▼</span>
 
-#include "print_tree_gui.h"
+<span class="text-blue-200">#include "print_tree_gui.h"</span>
 
 <span class="text-gray-500">/*
 * ast.c 内の main 関数
@@ -43,8 +43,8 @@ int main(void)
     }
 
     <span class="text-gray-500">// ▼ この出力をコピーしよう ▼</span>
-    printTreeGUI(top);
-    printf("\n");
+    <span class="text-blue-200">printTreeGUI(top);</span>
+    <span class="text-blue-200">printf("\n");</span>
 
     return 0;
 }
@@ -106,7 +106,7 @@ typedef struct abstract_node
             <div class="modal-box">
                 <p v-html="this.output_html" class="text-left text-xs"></p>
                 <div class="modal-action">
-                    <label for="modal" @click="download_h" class="btn btn-accent">保存する</label>
+                    <label for="modal" @click="download_h" class="btn btn-info">保存する</label>
                     <label for="modal" class="btn">閉じる</label>
                 </div>
             </div>
@@ -146,7 +146,7 @@ export default {
             let value = this.node_type_raw.replace(/\r?\n/g, '')
             if (value.slice(-1) === ',') value = value.slice(0, -1)
             const arr = Papa.parse(value)
-            
+
             this.output = `
 
 /*

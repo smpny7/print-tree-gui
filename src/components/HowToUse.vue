@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="flex text-3xl justify-center text-purple-500 mt-8">
+        <h2 class="flex text-3xl justify-center text-info mt-8">
             <button class="btn btn-ghost btn-sm btn-circle loading"></button>
             製作中...
         </h2>
