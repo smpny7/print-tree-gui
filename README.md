@@ -1,24 +1,15 @@
-# print_tree_gui
+![Print Tree GUI](readme_cover.jpg)
 
-## Project setup
-```
-npm install
-```
+# これは何をするサイトなの？
+情報工学実験C（ソフトウェア）のアセンブラ講義で作成する木構造を、グラフィカルに出力します。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+[こちらのサイト](https://print-tree-gui.netlify.app/) でデモを確認できます。
 
-### Compiles and minifies for production
-```
-npm run build
-```
+> https://print-tree-gui.netlify.app
 
-### Lints and fixes files
-```
-npm run lint
-```
+![Print Tree GUI](readme_demo.jpg)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# License
+This project is licensed under the MIT License - see LICENSE for details.
+
+Copyright © 2022 Developed by smpny7.
