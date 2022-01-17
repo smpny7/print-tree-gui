@@ -19,7 +19,7 @@
                                 <label v-if="can_generate" for="modal" @click="generate_h"
                                        class="btn btn-info modal-button">コード生成する</label>
                                 <label v-else
-                                       class="btn btn-info modal-button cursor-not-allowed">コード生成する</label>
+                                       class="btn btn-disabled bg-white modal-button cursor-not-allowed">コード生成する</label>
                             </p>
                         </li>
                         <li class="step step-info text-left">main 関数で以下を実行し、出力をこのサイトに貼り付ける！</li>
