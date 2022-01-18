@@ -80,7 +80,7 @@ ArryEl_AST,
        :class="{'border-2 border-yellow-500': is_valid.num_type_name === false}" placeholder="Number_AST"><InvalidAlert
                         v-if="is_valid.num_type_name === false" class="mt-2"/>
 <input type="text" class="textarea textarea-ghost w-full mt-3" v-model="array_type_name"
-       :class="{'border-2 border-yellow-500': is_valid.array_type_name === false}" placeholder="ArryEl_AST"><InvalidAlert
+       :class="{'border-2 border-yellow-500': is_valid.array_type_name === false}" placeholder="ArryEl_AST（任意）"><InvalidAlert
                         v-if="is_valid.array_type_name === false" class="mt-2"/>
                     </code>
                 </pre>
@@ -149,21 +149,21 @@ export default {
             node_type_raw: '',
             num_type_name: '',
             array_type_name: '',
-            nType: '',
-            varName: '',
-            value: '',
-            child: '',
-            brother: '',
+            nType: 'nType',
+            varName: 'varName',
+            value: 'value',
+            child: 'child',
+            brother: 'brother',
             output: '',
             output_html: '',
             is_valid: {
                 node_type_raw: null,
                 num_type_name: null,
-                array_type_name: null,
-                varName: null,
-                value: null,
-                child: null,
-                brother: null
+                nType: true,
+                varName: true,
+                value: true,
+                child: true,
+                brother: true
             }
         }
     },
@@ -171,7 +171,6 @@ export default {
         can_generate() {
             return this.is_valid.node_type_raw === true &&
                 this.is_valid.num_type_name === true &&
-                this.is_valid.array_type_name === true &&
                 this.is_valid.varName === true &&
                 this.is_valid.value === true &&
                 this.is_valid.child === true &&
@@ -184,9 +183,6 @@ export default {
         },
         num_type_name(value) {
             this.is_valid.num_type_name = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
-        },
-        array_type_name(value) {
-            this.is_valid.array_type_name = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
         },
         nType(value) {
             this.is_valid.nType = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
@@ -208,6 +204,7 @@ export default {
         generate_h() {
             let value = this.node_type_raw.replace(/\r?\n/g, '').replace(/ /g, '')
             if (value.slice(-1) === ',') value = value.slice(0, -1)
+            // noinspection JSUnresolvedFunction
             const arr = Papa.parse(value)
 
             this.output = `
@@ -241,7 +238,7 @@ void printTreeGUI(Node *np)
     printf("\\"varName\\": \\"%s\\",", np->${this.varName} ? np->${this.varName} : "null");
 
     printf("\\"value\\": ");
-    np->${this.nType} == ${this.num_type_name} || np->${this.nType} == ${this.array_type_name} ? printf("\\"%d\\",", np->${this.value}) : printf("\\"null\\",");
+    np->${this.nType} == ${this.num_type_name} ${this.array_type_name ? `|| np->${this.nType} == ${this.array_type_name}` : ''} ? printf("\\"%d\\",", np->${this.value}) : printf("\\"null\\",");
 
     printf("\\"child\\": [");
     if (np->${this.child} != NULL)
