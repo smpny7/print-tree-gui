@@ -86,10 +86,15 @@ int main(void)
                         <accent-text>int value1</accent-text>
                         ,
                         <accent-text>int value2</accent-text>
-                        と宣言した人や、きちんと綺麗な実装をするために
+                        と宣言した人や、アドレスを格納するために（型は違いますが）
                         <accent-text>int value</accent-text>
                         のみを宣言してポインタで多次元配列を実装した人もいると思います。
                         その場合コードを一部修正する必要があります。
+                    </p>
+                    <p class="leading-loose mt-3">
+                        ※ 補足: 課題1〜5 は
+                        <accent-text>講義通りの木構造を考えれば</accent-text>
+                        、この構造体で実装できるため変更は不要です。
                     </p>
                     <p class="leading-loose mt-3">
                         このプロジェクトは
