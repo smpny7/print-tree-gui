@@ -10,6 +10,15 @@
     <!--suppress HtmlUnknownTarget -->
     <link rel="icon" type="image/png" href="<%= BASE_URL %>icon-192x192.png">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4NCZRHW778"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4NCZRHW778');
+    </script>
 </head>
 <body>
 <noscript>
