@@ -62,6 +62,7 @@ int main(void)
 
 typedef enum
 {
+<span class="text-yellow-500">※ ここの値を今後変更した場合、再生成が必要です ↓</span>
 <textarea class="textarea textarea-ghost w-full pl-12" cols="30" rows="10" v-model="node_type_raw"
           :class="{'border-2 border-yellow-500': is_valid.node_type_raw === false}"
           placeholder="Pro_AST,
