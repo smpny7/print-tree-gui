@@ -180,7 +180,7 @@ export default {
     },
     watch: {
         node_type_raw(value) {
-            this.is_valid.node_type_raw = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
+            this.is_valid.node_type_raw = (value.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '').match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
         },
         num_type_name(value) {
             this.is_valid.num_type_name = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
@@ -203,7 +203,7 @@ export default {
     },
     methods: {
         generate_h() {
-            let value = this.node_type_raw.replace(/\r?\n/g, '').replace(/ /g, '')
+            let value = this.node_type_raw.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '').replace(/\r?\n/g, '').replace(/ /g, '')
             if (value.slice(-1) === ',') value = value.slice(0, -1)
             // noinspection JSUnresolvedFunction
             const arr = Papa.parse(value)
