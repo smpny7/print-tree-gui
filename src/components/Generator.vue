@@ -71,7 +71,8 @@ Ident_AST,
 Number_AST,
 ArryEl_AST,
 ...">
-</textarea><InvalidAlert v-if="is_valid.node_type_raw === false"/>
+</textarea><InvalidAlert v-if="is_valid.node_type_raw === false"/><ValidIcon v-if="is_valid.node_type_raw === true"
+                                                                             class="float-right mt-1"/>
 } NodeType;
 
 
@@ -79,10 +80,10 @@ ArryEl_AST,
 
 <input type="text" class="textarea textarea-ghost w-full" v-model="num_type_name"
        :class="{'border-2 border-yellow-500': is_valid.num_type_name === false}" placeholder="Number_AST"><InvalidAlert
-                        v-if="is_valid.num_type_name === false" class="mt-2"/>
-<input type="text" class="textarea textarea-ghost w-full mt-3" v-model="array_type_name"
-       :class="{'border-2 border-yellow-500': is_valid.array_type_name === false}" placeholder="ArryEl_AST（任意）"><InvalidAlert
-                        v-if="is_valid.array_type_name === false" class="mt-2"/>
+                        v-if="is_valid.num_type_name === false" class="mt-2"/><ValidIcon
+                        v-if="is_valid.num_type_name === true" class="flex flex-row-reverse relative top-2"/>
+<input type="text" class="textarea textarea-ghost w-full mt-3" v-model="array_type_name" placeholder="ArryEl_AST（任意）"><ValidIcon
+                        v-if="is_valid.array_type_name === true" class="flex flex-row-reverse relative top-2"/>
                     </code>
                 </pre>
             </div>
@@ -96,19 +97,24 @@ typedef struct abstract_node
 {
     NodeType <input type="text" class="textarea textarea-ghost my-1 w-32" v-model="nType"
                     :class="{'border-2 border-yellow-500': is_valid.nType === false}" placeholder="nType">;<InvalidAlert
-                        v-if="is_valid.nType === false" class="ml-6"/>
+                        v-if="is_valid.nType === false" class="ml-6"/><ValidIcon v-if="is_valid.nType === true"
+                                                                                 class="inline-block ml-3 relative top-2"/>
     char *<input type="text" class="textarea textarea-ghost my-1 w-32" v-model="varName"
                  :class="{'border-2 border-yellow-500': is_valid.varName === false}" placeholder="varName">;<InvalidAlert
-                        v-if="is_valid.varName === false" class="ml-6"/>
+                        v-if="is_valid.varName === false" class="ml-6"/><ValidIcon v-if="is_valid.varName === true"
+                                                                                   class="inline-block ml-3 relative top-2"/>
     int <input type="text" class="textarea textarea-ghost my-1 w-32" v-model="value"
                :class="{'border-2 border-yellow-500': is_valid.value === false}" placeholder="value">;<InvalidAlert
-                        v-if="is_valid.value === false" class="ml-6"/>
+                        v-if="is_valid.value === false" class="ml-6"/><ValidIcon v-if="is_valid.value === true"
+                                                                                 class="inline-block ml-3 relative top-2"/>
     struct Node *<input type="text" class="textarea textarea-ghost my-1 w-32" v-model="child"
                         :class="{'border-2 border-yellow-500': is_valid.child === false}" placeholder="child">;<InvalidAlert
-                        v-if="is_valid.child === false" class="ml-6"/>
+                        v-if="is_valid.child === false" class="ml-6"/><ValidIcon v-if="is_valid.child === true"
+                                                                                 class="inline-block ml-3 relative top-2"/>
     struct Node *<input type="text" class="textarea textarea-ghost my-1 w-32" v-model="brother"
                         :class="{'border-2 border-yellow-500': is_valid.brother === false}" placeholder="brother">;<InvalidAlert
-                        v-if="is_valid.brother === false" class="ml-6"/>
+                        v-if="is_valid.brother === false" class="ml-6"/><ValidIcon v-if="is_valid.brother === true"
+                                                                                   class="inline-block ml-3 relative top-2"/>
 } Node;
 
 <span class="text-gray-500">/* ✨ 以上で終了です ✨ */</span>
@@ -136,13 +142,15 @@ typedef struct abstract_node
 import Papa from 'papaparse'
 import moment from 'moment'
 import InvalidAlert from '@/components/parts/InvalidAlert'
+import ValidIcon from "@/components/parts/ValidIcon";
 
 const p = require('/package.json')
 
 export default {
     name: 'Generator',
     components: {
-        InvalidAlert
+        InvalidAlert,
+        ValidIcon
     },
     data() {
         return {
@@ -160,6 +168,7 @@ export default {
             is_valid: {
                 node_type_raw: null,
                 num_type_name: null,
+                array_type_name: null,
                 nType: true,
                 varName: true,
                 value: true,
@@ -172,6 +181,7 @@ export default {
         can_generate() {
             return this.is_valid.node_type_raw === true &&
                 this.is_valid.num_type_name === true &&
+                this.is_valid.nType === true &&
                 this.is_valid.varName === true &&
                 this.is_valid.value === true &&
                 this.is_valid.child === true &&
@@ -184,6 +194,9 @@ export default {
         },
         num_type_name(value) {
             this.is_valid.num_type_name = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
+        },
+        array_type_name(value) {
+            this.is_valid.array_type_name = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
         },
         nType(value) {
             this.is_valid.nType = (value.match(/^[A-Za-z0-9_,\n ]+$/g) !== null)
