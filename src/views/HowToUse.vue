@@ -151,7 +151,7 @@ int main(void)
 </template>
 
 <script>
-import AccentText from '@/components/parts/AccentText';
+import AccentText from '@/components/AccentText';
 
 export default {
     name: 'HowToUse',

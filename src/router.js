@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './components/Home.vue'
+import Home from './views/Home.vue'
 
 Vue.use(Router)
 
@@ -16,13 +16,13 @@ export default new Router({
         {
             path: '/how_to_use',
             name: 'how_to_use',
-            component: () => import('./components/HowToUse.vue'),
+            component: () => import('./views/HowToUse.vue'),
             meta: {title: 'How To Use'}
         },
         {
             path: '/generator',
             name: 'generator',
-            component: () => import('./components/Generator.vue'),
+            component: () => import('./views/Generator.vue'),
             meta: {title: 'Generator'}
         }
     ]

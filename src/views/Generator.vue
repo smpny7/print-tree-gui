@@ -141,8 +141,8 @@ typedef struct abstract_node
 <script>
 import Papa from 'papaparse'
 import moment from 'moment'
-import InvalidAlert from '@/components/parts/InvalidAlert'
-import ValidIcon from "@/components/parts/ValidIcon";
+import InvalidAlert from '@/components/InvalidAlert'
+import ValidIcon from "@/components/ValidIcon";
 
 const p = require('/package.json')
 
