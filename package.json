@@ -8,26 +8,26 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@tailwindcss/postcss7-compat": "^2.2.17",
-    "autoprefixer": "^9",
-    "core-js": "^3.20.3",
+    "core-js": "^3.21.1",
     "daisyui": "^1.25.4",
     "moment": "^2.29.1",
     "papaparse": "^5.3.1",
-    "postcss": "^8",
     "remixicon": "^2.5.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "vue": "^2.6.14",
     "vue-router": "^3.5.3",
     "vue-vis-network": "^1.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.2.17",
     "@vue/cli-plugin-babel": "~4.5.15",
     "@vue/cli-plugin-eslint": "~4.5.15",
     "@vue/cli-service": "~4.5.15",
+    "autoprefixer": "^9.8.8",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "postcss": "^8.4.8",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "vue-cli-plugin-tailwind": "~2.2.18",
     "vue-template-compiler": "^2.6.14"
   },
