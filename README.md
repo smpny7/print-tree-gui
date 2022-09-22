@@ -3,9 +3,9 @@
 # これは何をするサイトなの？
 情報工学実験C（ソフトウェア）のアセンブラ講義で作成する木構造を、グラフィカルに出力します。
 
-[こちらのサイト](https://print-tree-gui.netlify.app/) でデモを確認できます。
+[こちらのサイト](https://print-tree-gui.vercel.app/) でデモを確認できます。
 
-> https://print-tree-gui.netlify.app
+> https://print-tree-gui.vercel.app
 
 ![Print Tree GUI](readme_demo.jpg)
 
