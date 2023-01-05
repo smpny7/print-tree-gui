@@ -1,4 +1,4 @@
-![Print Tree GUI](readme_cover.jpg)
+![Print Tree GUI](docs/readme_cover.webp)
 
 # これは何をするサイトなの？
 情報工学実験C（ソフトウェア）のアセンブラ講義で作成する木構造を、グラフィカルに出力します。
@@ -7,7 +7,7 @@
 
 > https://print-tree-gui.vercel.app
 
-![Print Tree GUI](readme_demo.jpg)
+![Print Tree GUI](docs/readme_demo.webp)
 
 # License
 This project is licensed under the MIT License - see LICENSE for details.
