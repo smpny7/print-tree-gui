@@ -9,30 +9,29 @@
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
-    "clsx": "^1.2.1",
-    "dayjs": "^1.11.7",
-    "next": "13.1.1",
-    "papaparse": "^5.3.2",
+    "clsx": "^2.1.0",
+    "dayjs": "^1.11.10",
+    "next": "14.1.0",
+    "papaparse": "^5.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-graph-vis": "^1.0.7",
-    "react-hook-form": "^7.41.5"
+    "react-hook-form": "^7.50.1"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^13.1.1",
-    "@next/font": "^13.1.1",
-    "@types/node": "18.11.18",
-    "@types/papaparse": "^5.3.7",
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "18.0.10",
-    "@types/vis": "^4.21.24",
-    "autoprefixer": "^10.4.13",
-    "daisyui": "^2.46.1",
-    "postcss": "^8.4.20",
-    "prettier": "^2.8.1",
-    "prettier-plugin-tailwindcss": "^0.2.1",
-    "remixicon": "^2.5.0",
-    "tailwindcss": "^3.2.4",
-    "typescript": "4.9.4"
+    "@next/bundle-analyzer": "^14.1.0",
+    "@types/node": "20.11.19",
+    "@types/papaparse": "^5.3.14",
+    "@types/react": "^18.2.57",
+    "@types/react-dom": "18.2.19",
+    "@types/vis": "^4.21.27",
+    "autoprefixer": "^10.4.17",
+    "daisyui": "^4.7.2",
+    "postcss": "^8.4.35",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "remixicon": "^4.1.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "5.3.3"
   }
 }

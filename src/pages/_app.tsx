@@ -1,4 +1,4 @@
-import { Noto_Sans_JP, Roboto } from "@next/font/google";
+import { Noto_Sans_JP, Roboto } from "next/font/google";
 import clsx from "clsx";
 import type { AppProps } from "next/app";
 import "remixicon/fonts/remixicon.css";
@@ -7,7 +7,7 @@ import Header from "../components/Header";
 
 const notoSansJP = Noto_Sans_JP({
   weight: ["300", "700"],
-  subsets: ["japanese"],
+  subsets: ["latin"],
   variable: "--font-noto-sans-jp",
 });
 const roboto = Roboto({
